@@ -1,7 +1,8 @@
 import { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { Comic } from 'dh-marvel/features/home/home.types';
+import { Comic } from 'dh-marvel/features/comic/comic.types';
 import Head from 'next/head';
+import Link from 'next/link';
 import BodySingle from "dh-marvel/components/layouts/body/single/body-single";
 import { getComics } from 'dh-marvel/services/marvel/marvel.service';
 import Box from '@mui/material/Box';
@@ -13,6 +14,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+
 
 interface IndexPageProps {
     comics: Comic[];
@@ -54,9 +57,11 @@ const Index: NextPage<IndexPageProps> = ({ comics, currentPage }) => {
                                     {comic.title}
                                 </Typography>
                             </CardContent>
-                            <CardActions>
-                                <Button size="small">Ver detalle</Button>
-                                <Button size="small" variant="contained">Comprar</Button>
+                            <CardActions sx={{justifyContent: 'space-between'}}>
+                                <Link href={`/comics/${comic.id}`} passHref>
+                                    <Button size="small">Ver detalle</Button>
+                                </Link>
+                                <Button size="small" variant="contained" endIcon={<ShoppingCartIcon/>}>Comprar</Button>
                             </CardActions>
                         </Card>
                     ))}
