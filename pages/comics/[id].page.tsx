@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState,  } from 'react';
 import { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { Box, Card, CardContent, CardMedia, Typography, Button, Select, MenuItem, CardActions } from '@mui/material';
+import { SelectChangeEvent } from '@mui/material/Select';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { getComic , getComicCharacters } from 'dh-marvel/services/marvel/marvel.service';
@@ -14,8 +15,7 @@ interface ComicPageProps {
 }
 
 const ComicPage: NextPage<ComicPageProps> = ({ comic, characters }) => {
-  console.log(comic)
-  console.log(characters)
+  
   const [selectValue, setSelectValue] = useState('');
   const router = useRouter();
 
@@ -23,10 +23,10 @@ const ComicPage: NextPage<ComicPageProps> = ({ comic, characters }) => {
     router.back();
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: SelectChangeEvent<typeof selectValue>) => {
     const characterId = e.target.value;
     setSelectValue(characterId);
-    router.push(`/personajes/${characterId}`)
+    router.push(`/personajes/${characterId}`);
   }
 
   return (
@@ -62,7 +62,7 @@ const ComicPage: NextPage<ComicPageProps> = ({ comic, characters }) => {
               <Typography variant="subtitle1" gutterBottom fontWeight={600} marginTop={4}>
                 Seleccione un personaje
               </Typography>
-              <Select style={{ width: '100%' }} value={selectValue} placeholder="Despliega la lista" onChange={handleChange}>
+              <Select style={{ width: '100%' }} value={selectValue} onChange={handleChange}>
                 {characters.map(character => (
                   <MenuItem key={character.id} value={character.id}>{character.name}</MenuItem>
                 ))}

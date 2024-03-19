@@ -10,7 +10,7 @@ interface CharacterPageProps {
 }
 
 const CharacterPage: NextPage<CharacterPageProps> = ({ character }) => {
-  console.log(character)
+  
   const router = useRouter();
   const handleGoBack = () => {
     router.back();
