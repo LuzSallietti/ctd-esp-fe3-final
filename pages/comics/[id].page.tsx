@@ -1,7 +1,7 @@
-import React from 'react'
+import { useState } from 'react';
 import { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { Box, Card, CardContent, CardMedia, Typography, Button, Select, MenuItem, CardActionArea, CardActions } from '@mui/material';
+import { Box, Card, CardContent, CardMedia, Typography, Button, Select, MenuItem, CardActions } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { getComic , getComicCharacters } from 'dh-marvel/services/marvel/marvel.service';
@@ -16,11 +16,18 @@ interface ComicPageProps {
 const ComicPage: NextPage<ComicPageProps> = ({ comic, characters }) => {
   console.log(comic)
   console.log(characters)
+  const [selectValue, setSelectValue] = useState('');
   const router = useRouter();
 
   const handleGoBack = () => {
     router.back();
   };
+
+  const handleChange = (e) => {
+    const characterId = e.target.value;
+    setSelectValue(characterId);
+    router.push(`/personajes/${characterId}`)
+  }
 
   return (
     <>
@@ -55,9 +62,9 @@ const ComicPage: NextPage<ComicPageProps> = ({ comic, characters }) => {
               <Typography variant="subtitle1" gutterBottom fontWeight={600} marginTop={4}>
                 Seleccione un personaje
               </Typography>
-              <Select style={{ width: '100%' }} value="">
+              <Select style={{ width: '100%' }} value={selectValue} placeholder="Despliega la lista" onChange={handleChange}>
                 {characters.map(character => (
-                  <MenuItem key={character.id} value={`${character.id}`}>{character.name}</MenuItem>
+                  <MenuItem key={character.id} value={character.id}>{character.name}</MenuItem>
                 ))}
               </Select>                            
             </>
@@ -81,7 +88,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const id = params?.id as string
 
   const comic = await getComic(id)
-  // Obtener personajes asociados al cómic
+  
   const characters = await getComicCharacters(id);
 
   return {
