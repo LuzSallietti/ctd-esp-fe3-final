@@ -49,7 +49,7 @@ const Index: NextPage<IndexPageProps> = ({ comics, currentPage }) => {
                         <Card key={comic.id} sx={{ width: '16rem', margin: '1rem 2rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                             <CardMedia
                                 sx={{ width: '100%', height: '15rem' }}
-                                image={`${comic.thumbnail.path}.${comic.thumbnail.extension}`} // Concatenar la URL de la imagen
+                                image={`${comic.thumbnail.path}.${comic.thumbnail.extension}`} 
                                 title={comic.title}
                             />
                             <CardContent>

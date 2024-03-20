@@ -1,5 +1,5 @@
-import { getCharacter } from 'dh-marvel/services/marvel/marvel.service'
-import { GetServerSideProps, NextPage } from 'next'
+import { getCharacter, getCharactersCount, getCharacters } from 'dh-marvel/services/marvel/marvel.service'
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import { useRouter } from 'next/router';
 import { Character } from 'dh-marvel/features/character/character.types'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
@@ -47,7 +47,30 @@ const CharacterPage: NextPage<CharacterPageProps> = ({ character }) => {
   )
 }
 
-export const getServerSideProps : GetServerSideProps = async ({params}) => {
+export const getStaticPaths: GetStaticPaths = async () => {
+	const totalComics = await getCharactersCount();  
+	const limit = 100;    
+  const totalPages = Math.ceil(totalComics / limit);
+  const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
+
+  // Generar los paths para cada página de resultados de la API
+  const paths = await Promise.all(
+    pageNumbers.map(async (pageNumber) => {
+      const offset = (pageNumber - 1) * limit;
+      const characters = await getCharacters(offset, limit);
+      return characters.map((character : Character) => ({
+        params: { id: character.id.toString() }, 
+      }));
+    })
+  );
+  
+  return {
+    paths: paths.flat(), 
+    fallback: false,
+  };
+};
+
+export const getStaticProps: GetStaticProps  = async ({params}) => {
   
   const id = params?.id as string
   const character = await getCharacter(id);
@@ -55,10 +78,10 @@ export const getServerSideProps : GetServerSideProps = async ({params}) => {
   return {
 		props: {
 			character
-		}
+		},
+    revalidate: 86400 // una vez al día
 	}
 
 }
-
 
 export default CharacterPage

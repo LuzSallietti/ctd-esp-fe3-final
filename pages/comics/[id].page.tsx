@@ -74,7 +74,7 @@ const ComicPage: NextPage<ComicPageProps> = ({ comic, characters }) => {
               Volver
             </Button>
             <Button variant="contained" color="primary" endIcon={<ShoppingCartIcon/>} disabled={comic.stock === 0} sx={{ mt: 2 }}>
-            {comic.stock === 0 ? "Sin stock disponible" : "Comprar"}
+            {comic.stock === 0 ? "Sin stock" : "Comprar"}
             </Button>
           </CardActions>          
         </CardContent>
