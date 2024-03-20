@@ -43,7 +43,8 @@ const Faqs: NextPage<FaqsPageProps> = ({ faqs }) => {
 }
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
-  const response = await fetch("https://marvelapp-xi.vercel.app/api/faqs");
+  const url = process.env.VERCEL_PROD_URL
+  const response = await fetch(`${url}/api/faqs`);
   const faqs = await response.json();
 
   return {
