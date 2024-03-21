@@ -79,7 +79,7 @@ export const getStaticProps: GetStaticProps  = async ({params}) => {
 		props: {
 			character
 		},
-    5 * 24 * 60 * 60, // por ahora cada 5 días (en segundos)
+    revalidate: 5 * 24 * 60 * 60, // por ahora cada 5 días (en segundos)
 	}
 
 }
