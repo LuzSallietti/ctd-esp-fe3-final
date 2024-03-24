@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { Comic } from 'dh-marvel/features/comic/comic.types';
 import Head from 'next/head';
 import Link from 'next/link';
+import LayoutGeneral from 'dh-marvel/components/layouts/layout-general';
 import BodySingle from "dh-marvel/components/layouts/body/single/body-single";
 import { getComics } from 'dh-marvel/services/marvel/marvel.service';
 import Box from '@mui/material/Box';
@@ -42,7 +43,7 @@ const Index: NextPage<IndexPageProps> = ({ comics, currentPage }) => {
                 <meta name="description" content="By your Marvel Comics online" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-
+            <LayoutGeneral>
             <BodySingle title={"Comics"}>
                 <Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', padding: '5vw 2vw' }}>
                     {comics.map((comic) => (
@@ -75,6 +76,7 @@ const Index: NextPage<IndexPageProps> = ({ comics, currentPage }) => {
                     </Button>
                 </Box>
             </BodySingle>
+            </LayoutGeneral>
         </>
     );
 };

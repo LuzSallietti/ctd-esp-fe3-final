@@ -2,6 +2,7 @@ import React from 'react'
 import { FaqsType } from 'dh-marvel/components/faqs/faqsData'
 import { GetStaticProps, NextPage } from "next";
 import Head from 'next/head';
+import LayoutGeneral from 'dh-marvel/components/layouts/layout-general';
 import { Box } from '@mui/material';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -22,21 +23,23 @@ const Faqs: NextPage<FaqsPageProps> = ({ faqs }) => {
         <meta name="description" content="Preguntas Frecuentes Marvel App: todas las respuestas a las dudas frecuentes." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Box component={'section'} sx={{display:'flex', flexDirection:'column', padding: '5vw 2vw'}}>
-      <Typography variant='h4' component='h1' sx={{textAlign: 'center'}}> Preguntas Frecuentes</Typography>
-      <Box sx={{ marginTop:'3rem' }}>
-      {faqs.map((faq) => (
-        <Accordion key={faq.id} sx={{ margin:'.5rem 0'}}>
-          <AccordionSummary id="panel-header" aria-controls="panel-content" sx={{ fontWeight:'600'}} expandIcon={<ArrowDropDownIcon />}>
-            {faq.question}
-          </AccordionSummary>
-          <AccordionDetails>
-            {faq.answer}
-          </AccordionDetails>
-        </Accordion>
-      ))}
-      </Box>
-      </Box>
+      <LayoutGeneral>
+        <Box component={'section'} sx={{ display: 'flex', flexDirection: 'column', padding: '5vw 2vw' }}>
+          <Typography variant='h4' component='h1' sx={{ textAlign: 'center' }}> Preguntas Frecuentes</Typography>
+          <Box sx={{ marginTop: '3rem' }}>
+            {faqs.map((faq) => (
+              <Accordion key={faq.id} sx={{ margin: '.5rem 0' }}>
+                <AccordionSummary id="panel-header" aria-controls="panel-content" sx={{ fontWeight: '600' }} expandIcon={<ArrowDropDownIcon />}>
+                  {faq.question}
+                </AccordionSummary>
+                <AccordionDetails>
+                  {faq.answer}
+                </AccordionDetails>
+              </Accordion>
+            ))}
+          </Box>
+        </Box>
+      </LayoutGeneral>
     </>
   )
 }
