@@ -56,10 +56,7 @@ const ConfirmationPage: NextPage = () => {
                 <Button variant="outlined" color="primary" onClick={handleGoHome} sx={{ mt: 2, width: '50%' }}>
                   Volver al Inicio
                 </Button>
-              </CardContent>
-              <CardActions>
-                
-                </CardActions>
+              </CardContent>              
             </Card>
           </Box>
         </Box>

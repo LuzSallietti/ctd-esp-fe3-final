@@ -59,7 +59,7 @@ const CheckoutForm:React.FC<CheckoutFormProps> = ({ onSubmit}) => {
 
     return (
         <>
-            <Stepper sx={{ width: '100%' }} activeStep={step} alternativeLabel>
+            <Stepper sx={{ width: '100%', mt:'1ren' }} activeStep={step} alternativeLabel>
                 <Step>
                     <StepLabel>
                         Datos personales
