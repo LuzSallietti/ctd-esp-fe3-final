@@ -8,8 +8,11 @@ import { schema } from 'rules';
 
 
 type DataForm = yup.InferType<typeof schema>;
+interface CheckoutFormProps {
+    onSubmit: (data: DataForm) => void; 
+  }
 
-const CheckoutForm = () => {
+const CheckoutForm:React.FC<CheckoutFormProps> = ({ onSubmit}) => {
     const [step, setStep] = useState<number>(0)
 
     const handleNextStep = () => {
@@ -20,16 +23,13 @@ const CheckoutForm = () => {
             return
         }
         setStep((prevStep) => prevStep - 1);
-
     };
+    
 
     const {
         control,
         handleSubmit,
-        formState: { errors, isValid },
-        // register,
-        // getValues,
-        watch
+        formState: { errors, isValid },        
     } = useForm<DataForm>({
         resolver: yupResolver(schema),
         mode: "onBlur",
@@ -40,24 +40,22 @@ const CheckoutForm = () => {
                 email: "",
                 address: {
                     address1: "",
-                    address2: "",
+                    address2: " ",
                     city: "",
                     state: "",
                     zipCode: ""
                 }
             },
             card: {
-                cardNumber: "",
+                number: "",
                 cvc: "",
                 expDate: "",
-                cardName: ""
+                nameOnCard: ""
             }
         },
     });
 
-    const onSubmit = (data: DataForm) => {
-        console.log(data);
-    };
+    
 
     return (
         <>
@@ -229,7 +227,7 @@ const CheckoutForm = () => {
                     <>
                         <Grid item xs={12} sx={{ mt: '.5rem' }}>
                             <Controller
-                                name='card.cardNumber'
+                                name='card.number'
                                 control={control}
                                 defaultValue={""}
                                 rules={{ required: true }}
@@ -243,11 +241,11 @@ const CheckoutForm = () => {
                                     />
                                 )}
                             />
-                            {errors.card?.cardNumber && <FormHelperText error>{errors.card?.cardNumber.message}</FormHelperText>}
+                            {errors.card?.number && <FormHelperText error>{errors.card?.number.message}</FormHelperText>}
                         </Grid>
                         <Grid item xs={12} sx={{ mt: '.5rem' }}>
                             <Controller
-                                name='card.cardName'
+                                name='card.nameOnCard'
                                 control={control}
                                 rules={{ required: true }}
                                 defaultValue={""}
@@ -261,7 +259,7 @@ const CheckoutForm = () => {
                                     />
                                 )}
                             />
-                            {errors.card?.cardName && <FormHelperText error>{errors.card?.cardName.message}</FormHelperText>}
+                            {errors.card?.nameOnCard && <FormHelperText error>{errors.card?.nameOnCard.message}</FormHelperText>}
                         </Grid>
                         <Grid item xs={12} sx={{ mt: '.5rem' }}>
                             <Controller
@@ -335,7 +333,7 @@ const CheckoutForm = () => {
                             variant="contained"
                             color="primary"
                             fullWidth
-                            disabled={!!errors.card?.cardName || !!errors.card?.cardNumber || !!errors.card?.cvc || !!errors.card?.expDate}
+                            disabled={!!errors.card?.nameOnCard || !!errors.card?.number || !!errors.card?.cvc || !!errors.card?.expDate}
                             onSubmit={handleSubmit(onSubmit)}
                         >
                             Comprar

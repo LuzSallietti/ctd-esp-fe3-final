@@ -62,7 +62,9 @@ const Index: NextPage<IndexPageProps> = ({ comics, currentPage }) => {
                                 <Link href={`/comics/${comic.id}`} passHref>
                                     <Button size="small">Ver detalle</Button>
                                 </Link>
+                                <Link href={`/checkout?id=${comic.id}`}>
                                 <Button size="small" variant="contained" endIcon={<ShoppingCartIcon/>}>Comprar</Button>
+                                </Link>
                             </CardActions>
                         </Card>
                     ))}

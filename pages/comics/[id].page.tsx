@@ -46,7 +46,7 @@ const ComicPage: NextPage<ComicPageProps> = ({ comic, characters }) => {
               <Typography variant="h5" component="h2" gutterBottom fontWeight={800}>
                 {comic.title}
               </Typography>
-              <Typography variant='h4' fontWeight={600}>$75</Typography>
+              <Typography variant='h4' fontWeight={600}>${comic.price}</Typography>
               <Typography variant="body2" gutterBottom>
                 {`Precio anterior: $${comic.oldPrice}`}
               </Typography>

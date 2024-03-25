@@ -11,9 +11,9 @@ import {
 
 const serverError = 'error'
 export const invalidAddress = 'invalid'
-export const validCard = '4242 4242 4242 4242'.replace(" ", "");
-export const withoutFundsCard = '4111 4111 4111 4111'.replace(" ", "");
-export const withoutAuthorizationCard = '4000 4000 4000 4000'.replace(" ", "");
+export const validCard = '4242424242424242';
+export const withoutFundsCard = '4111411141114111';
+export const withoutAuthorizationCard = '4000400040004000';
 
 type Data = {
     data: any;
@@ -31,6 +31,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
     }
     try {
         const body: CheckoutInput = req.body;
+        console.log(body.card.number)
         if (body.customer.address.address2 === invalidAddress) {
             res.status(400).json(ERROR_INCORRECT_ADDRESS);
             return
