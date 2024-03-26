@@ -3,7 +3,7 @@ import { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import LayoutGeneral from 'dh-marvel/components/layouts/layout-general';
-import { Box, Card, CardContent, CardMedia, Typography, Button, Select, MenuItem, CardActions } from '@mui/material';
+import { Box, Card, CardContent, CardMedia, Typography, Button, Select, MenuItem, CardActions, Container } from '@mui/material';
 import { SelectChangeEvent } from '@mui/material/Select';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
@@ -34,15 +34,15 @@ const ComicPage: NextPage<ComicPageProps> = ({ comic, characters }) => {
   return (
     <>
       <LayoutGeneral>
-        <Box sx={{ padding: '5vw 2vw', display: 'flex', justifyContent: 'center' }}>
-          <Card sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, width: { xs: '100%', md: '66%' }, minHeight: '66vh' }}>
+        <Container sx={{p:{ xs:'1rem', sm:'3rem 0'}}}>        
+          <Card sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, minWidth: { xs: '100%', md: '100%' }, minHeight: '66vh' }}>
             <CardMedia
               component="img"
-              sx={{ width: { xs: '100%', sm: '50%' }, height: '75%', objectFit: 'cover' }}
+              sx={{ width: { xs: '100%', sm: '50%' }, height: { xs: '100%', sm: '20rem'}, objectFit: 'cover' }}
               image={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
-              alt="Producto"
+              alt={comic.title}
             />
-            <CardContent sx={{ flex: '1', flexDirection: 'column' }}>
+            <CardContent sx={{ flex: '1', flexDirection: 'column', width: { xs: '100%', sm: '50%' } }}>
               <Typography variant="h5" component="h2" gutterBottom fontWeight={800}>
                 {comic.title}
               </Typography>
@@ -84,7 +84,8 @@ const ComicPage: NextPage<ComicPageProps> = ({ comic, characters }) => {
               </CardActions>
             </CardContent>
           </Card>
-        </Box>
+          </Container>
+       
       </LayoutGeneral>
     </>
   )

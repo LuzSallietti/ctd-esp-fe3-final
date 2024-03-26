@@ -59,7 +59,7 @@ const CheckoutForm:React.FC<CheckoutFormProps> = ({ onSubmit}) => {
 
     return (
         <>
-            <Stepper sx={{ width: '100%', mt:'1ren' }} activeStep={step} alternativeLabel>
+            <Stepper sx={{ width: '100%', mt:'2rem' }} activeStep={step} alternativeLabel>
                 <Step>
                     <StepLabel>
                         Datos personales
@@ -288,7 +288,7 @@ const CheckoutForm:React.FC<CheckoutFormProps> = ({ onSubmit}) => {
                                 render={({ field }) => (
                                     <TextField
                                         {...field}
-                                        type='text'
+                                        type='password'
                                         label="Código de seguridad"
                                         variant="outlined"
                                         sx={{ width: 1 }}

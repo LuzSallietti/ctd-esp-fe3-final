@@ -5,7 +5,7 @@ import LayoutCheckout from 'dh-marvel/components/layouts/layout-checkout';
 import { getComic } from 'dh-marvel/services/marvel/marvel.service';
 import { Comic } from 'dh-marvel/features/comic/comic.types';
 import CharacterCard from 'dh-marvel/components/checkout/character-card.component';
-import { Box, Alert, Snackbar, Typography } from '@mui/material';
+import { Box, Alert, Snackbar, Typography, Container } from '@mui/material';
 import CheckoutForm from 'dh-marvel/components/checkout/checkout-form.component';
 import { CheckoutInput } from 'dh-marvel/features/checkout/checkout.types';
 import * as yup from "yup";
@@ -53,7 +53,7 @@ const Checkout: NextPage<CheckoutPageProps> = ({ comic }) => {
 
   return (
     <LayoutCheckout>
-      <Box sx={{ padding: '5vw 2vw', display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'center', flexWrap:'wrap', width: '100%' }}>
+      <Container sx={{ p:{ xs:'1rem', sm:'3rem 0'}, display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'center', flexWrap:'wrap', width: '100%' }}>
       <Typography variant='h4' component='h1' sx={{width: '100%', textAlign:'center', mb:'2rem'}}>Checkout</Typography>
 
         {comic && <CharacterCard data={comic} />}
@@ -72,7 +72,7 @@ const Checkout: NextPage<CheckoutPageProps> = ({ comic }) => {
                 message={translateError(error)} />
             </>}
         </Box>
-      </Box>
+      </Container>
     </LayoutCheckout>
   );
 };

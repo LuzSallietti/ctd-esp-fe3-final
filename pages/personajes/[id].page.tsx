@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import LayoutGeneral from 'dh-marvel/components/layouts/layout-general';
 import { Character } from 'dh-marvel/features/character/character.types'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import { Box, Card, CardContent, CardMedia, Typography, Button, Select, MenuItem, CardActions } from '@mui/material';
+import { Container, Card, CardContent, CardMedia, Typography, Button, Select, MenuItem, CardActions } from '@mui/material';
 
 interface CharacterPageProps {
   character: Character
@@ -19,13 +19,13 @@ const CharacterPage: NextPage<CharacterPageProps> = ({ character }) => {
   return (
     <>
       <LayoutGeneral>
-        <Box sx={{ padding: '5vw 2vw', display: 'flex', justifyContent: 'center' }}>
-          <Card sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, width: { xs: '100%', md: '66%' }, minHeight: '66vh' }}>
+      <Container sx={{p:{ xs:'1rem', sm:'3rem 0'}}}>
+          <Card sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, minWidth: { xs: '100%', md: '100%' }, minHeight: '66vh' }}>
             <CardMedia
               component="img"
-              sx={{ width: { xs: '100%', sm: '50%' }, height: '75%', objectFit: 'cover' }}
+              sx={{ width: { xs: '100%', sm: '50%' }, height: { xs: '100%', sm: '20rem'}, objectFit: 'cover' }}
               image={`${character.thumbnail.path}.${character.thumbnail.extension}`}
-              alt="Producto"
+              alt={character.name}
             />
             <CardContent sx={{ flex: '1', flexDirection: 'column' }}>
               <Typography variant="h5" component="h2" gutterBottom fontWeight={800}>
@@ -44,7 +44,7 @@ const CharacterPage: NextPage<CharacterPageProps> = ({ character }) => {
               </CardActions>
             </CardContent>
           </Card>
-        </Box>
+        </Container>
       </LayoutGeneral>
     </>
   )

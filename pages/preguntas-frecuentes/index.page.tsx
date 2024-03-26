@@ -24,7 +24,7 @@ const Faqs: NextPage<FaqsPageProps> = ({ faqs }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <LayoutGeneral>
-        <Box component={'section'} sx={{ display: 'flex', flexDirection: 'column', padding: '5vw 2vw' }}>
+        <Box component={'section'} sx={{ display: 'flex', flexDirection: 'column', p:{ xs:'1rem', sm:'3rem 0'} }}>
           <Typography variant='h4' component='h1' sx={{ textAlign: 'center' }}> Preguntas Frecuentes</Typography>
           <Box sx={{ marginTop: '3rem' }}>
             {faqs.map((faq) => (

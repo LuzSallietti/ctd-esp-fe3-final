@@ -8,10 +8,10 @@ interface CharacterCardProps {
 const CharacterCard: React.FC<CharacterCardProps> = ({ data }) => {
     return (
         <>
-            <Card>
+            <Card sx={{minWidth: { xs: '100%', md: '50%' }}}>
                 <CardMedia
                     component="img"
-                    sx={{ width: '100%', height: '25vw', objectFit: 'cover' }}
+                    sx={{ width: '100%', height: '20rem', objectFit: 'cover' }}
                     image={`${data.thumbnail.path}.${data.thumbnail.extension}`}
                     alt={data.title}
                 />

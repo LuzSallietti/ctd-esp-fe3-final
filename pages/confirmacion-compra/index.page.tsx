@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import LayoutCheckout from 'dh-marvel/components/layouts/layout-checkout';
 import { CheckoutInput } from 'dh-marvel/features/checkout/checkout.types';
 import Paper from '@mui/material/Paper';
-import { Alert, Typography, Box, Card, CardMedia, CardContent, CardActions, Button  } from '@mui/material';
+import { Alert, Typography, Box, Card, CardMedia, CardContent, Container, Button  } from '@mui/material';
 
 
 const ConfirmationPage: NextPage = () => {
@@ -29,7 +29,7 @@ const ConfirmationPage: NextPage = () => {
   return (
     <LayoutCheckout>
       {data && <>
-        <Box sx={{ flexDirection: 'column', width: '100%', padding: '5vw 2vw' }}>
+        <Container sx={{p:{ xs:'1rem', sm:'3rem 0'}}}>  
           <Paper elevation={1} sx={{ width: '100%' }}>
             <Alert variant="filled">Que disfrutes tu compra</Alert>
           </Paper>
@@ -53,13 +53,13 @@ const ConfirmationPage: NextPage = () => {
                 <Typography variant='body1'>Dirección: {data.customer.address.address1}</Typography>
                 <Typography variant='body1'>Ciudad: {data.customer.address.city}</Typography>
                 <Typography variant='body1'>Provincia: {data.customer.address.state}</Typography>
-                <Button variant="outlined" color="primary" onClick={handleGoHome} sx={{ mt: 2, width: '50%' }}>
+                <Button variant="outlined" color="primary" onClick={handleGoHome} sx={{ mt: 2, width: '66%' }}>
                   Volver al Inicio
                 </Button>
               </CardContent>              
             </Card>
           </Box>
-        </Box>
+        </Container>
       </>}
     </LayoutCheckout>
 
