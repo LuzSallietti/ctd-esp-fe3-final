@@ -4,7 +4,7 @@ import { Controller, useForm } from "react-hook-form";
 import { Step, StepLabel, Stepper, Button, Grid, TextField, Box, FormHelperText } from '@mui/material'
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { schema } from 'rules';
+import { schema } from '../../rules';
 
 
 type DataForm = yup.InferType<typeof schema>;

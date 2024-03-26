@@ -1,17 +1,18 @@
 import { NextPage } from 'next'
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import LayoutCheckout from 'dh-marvel/components/layouts/layout-checkout';
 import { CheckoutInput } from 'dh-marvel/features/checkout/checkout.types';
 import Paper from '@mui/material/Paper';
-import { Alert, Typography, Box, Card, CardMedia, CardContent, Container, Button  } from '@mui/material';
+import { Alert, Typography, Box, Card, CardMedia, CardContent, Container, Button } from '@mui/material';
 
 
 const ConfirmationPage: NextPage = () => {
   const [data, setData] = useState<CheckoutInput | null>(null)
   const router = useRouter()
 
-  const handleGoHome= () => {    
+  const handleGoHome = () => {
     router.push('/')
     sessionStorage.clear()
   }
@@ -27,41 +28,48 @@ const ConfirmationPage: NextPage = () => {
   }, [])
 
   return (
-    <LayoutCheckout>
-      {data && <>
-        <Container sx={{p:{ xs:'1rem', sm:'3rem 0'}}}>  
-          <Paper elevation={1} sx={{ width: '100%' }}>
-            <Alert variant="filled">Que disfrutes tu compra</Alert>
-          </Paper>
-          <Box sx={{ width: '100%', marginTop:'2rem'}}>
-            <Card sx={{ display: 'flex' }}>
-              <CardMedia
-                component="img"
-                sx={{ width: '15vw', height: '15vw', objectFit: 'cover' }}
-                image={data.order.image}
-                alt={data.order.name}
-              />
-              <CardContent sx={{ flex: '1', flexDirection: 'column' }}>
-                <Typography variant="h6" component="h2" gutterBottom fontWeight={600}>
-                  {data.order.name}
-                </Typography>
-                <Typography variant='h6' fontWeight={600}>${data.order.price}</Typography>
-                <Typography variant='body2' component='h3' fontWeight={600} mt={2}>Datos de envío</Typography>
-                <Typography variant='body1'>Nombre: {data.customer.name}</Typography>
-                <Typography variant='body1'>Apellido: {data.customer.lastname}</Typography>
-                <Typography variant='body1'>Correo electrónico: {data.customer.email}</Typography>
-                <Typography variant='body1'>Dirección: {data.customer.address.address1}</Typography>
-                <Typography variant='body1'>Ciudad: {data.customer.address.city}</Typography>
-                <Typography variant='body1'>Provincia: {data.customer.address.state}</Typography>
-                <Button variant="outlined" color="primary" onClick={handleGoHome} sx={{ mt: 2, width: '66%' }}>
-                  Volver al Inicio
-                </Button>
-              </CardContent>              
-            </Card>
-          </Box>
-        </Container>
-      </>}
-    </LayoutCheckout>
+    <>
+      <Head>
+        <title>Marvel Comics E-commerce - Confirmación</title>
+        <meta name="description" content="Gracias por comprar en Marvel E-commerce" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <LayoutCheckout>
+        {data && <>
+          <Container sx={{ p: { xs: '1rem', sm: '3rem 0' } }}>
+            <Paper elevation={1} sx={{ width: '100%' }}>
+              <Alert variant="filled">Que disfrutes tu compra</Alert>
+            </Paper>
+            <Box sx={{ width: '100%', marginTop: '2rem' }}>
+              <Card sx={{ display: 'flex' }}>
+                <CardMedia
+                  component="img"
+                  sx={{ width: '15vw', height: '15vw', objectFit: 'cover' }}
+                  image={data.order.image}
+                  alt={data.order.name}
+                />
+                <CardContent sx={{ flex: '1', flexDirection: 'column' }}>
+                  <Typography variant="h6" component="h2" gutterBottom fontWeight={600}>
+                    {data.order.name}
+                  </Typography>
+                  <Typography variant='h6' fontWeight={600}>${data.order.price}</Typography>
+                  <Typography variant='body2' component='h3' fontWeight={600} mt={2}>Datos de envío</Typography>
+                  <Typography variant='body1'>Nombre: {data.customer.name}</Typography>
+                  <Typography variant='body1'>Apellido: {data.customer.lastname}</Typography>
+                  <Typography variant='body1'>Correo electrónico: {data.customer.email}</Typography>
+                  <Typography variant='body1'>Dirección: {data.customer.address.address1}</Typography>
+                  <Typography variant='body1'>Ciudad: {data.customer.address.city}</Typography>
+                  <Typography variant='body1'>Provincia: {data.customer.address.state}</Typography>
+                  <Button variant="outlined" color="primary" onClick={handleGoHome} sx={{ mt: 2, width: '66%' }}>
+                    Volver al Inicio
+                  </Button>
+                </CardContent>
+              </Card>
+            </Box>
+          </Container>
+        </>}
+      </LayoutCheckout>
+    </>
 
   )
 }

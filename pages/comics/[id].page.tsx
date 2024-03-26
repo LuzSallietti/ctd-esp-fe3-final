@@ -1,5 +1,6 @@
 import { useState, } from 'react';
 import { GetServerSideProps, NextPage } from 'next';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import LayoutGeneral from 'dh-marvel/components/layouts/layout-general';
@@ -33,7 +34,12 @@ const ComicPage: NextPage<ComicPageProps> = ({ comic, characters }) => {
 
   return (
     <>
-      <LayoutGeneral>
+      <Head>
+        <title>Marvel Comics E-commerce - Comics</title>
+        <meta name="description" content="Descubre los comics de Marvel" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <LayoutGeneral>        
         <Container sx={{p:{ xs:'1rem', sm:'3rem 0'}}}>        
           <Card sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, minWidth: { xs: '100%', md: '100%' }, minHeight: '66vh' }}>
             <CardMedia

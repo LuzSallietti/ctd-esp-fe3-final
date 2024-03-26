@@ -1,5 +1,6 @@
 import { getCharacter, getCharactersCount, getCharacters } from 'dh-marvel/services/marvel/marvel.service'
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import LayoutGeneral from 'dh-marvel/components/layouts/layout-general';
 import { Character } from 'dh-marvel/features/character/character.types'
@@ -18,12 +19,17 @@ const CharacterPage: NextPage<CharacterPageProps> = ({ character }) => {
   };
   return (
     <>
+      <Head>
+        <title>Marvel Comics E-commerce - Personajes</title>
+        <meta name="description" content="Descubre los personajes de Marvel" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <LayoutGeneral>
-      <Container sx={{p:{ xs:'1rem', sm:'3rem 0'}}}>
+        <Container sx={{ p: { xs: '1rem', sm: '3rem 0' } }}>
           <Card sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, minWidth: { xs: '100%', md: '100%' }, minHeight: '66vh' }}>
             <CardMedia
               component="img"
-              sx={{ width: { xs: '100%', sm: '50%' }, height: { xs: '100%', sm: '20rem'}, objectFit: 'cover' }}
+              sx={{ width: { xs: '100%', sm: '50%' }, height: { xs: '100%', sm: '20rem' }, objectFit: 'cover' }}
               image={`${character.thumbnail.path}.${character.thumbnail.extension}`}
               alt={character.name}
             />

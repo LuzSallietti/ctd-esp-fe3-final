@@ -40,7 +40,7 @@ const Index: NextPage<IndexPageProps> = ({ comics, currentPage }) => {
         <>
             <Head>
                 <title>Marvel Comics E-commerce</title>
-                <meta name="description" content="By your Marvel Comics online" />
+                <meta name="description" content="Compra tus comics preferidos de Marvel online" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <LayoutGeneral>

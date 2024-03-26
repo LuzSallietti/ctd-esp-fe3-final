@@ -8,7 +8,7 @@ import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { Typography } from '@mui/material';
+import { Typography, Container } from '@mui/material';
 
 
 interface FaqsPageProps {
@@ -19,16 +19,16 @@ const Faqs: NextPage<FaqsPageProps> = ({ faqs }) => {
   return (
     <>
       <Head>
-        <title>Preguntas Frecuentes</title>
-        <meta name="description" content="Preguntas Frecuentes Marvel App: todas las respuestas a las dudas frecuentes." />
+        <title>Marvel Comics E-commerce - Preguntas Frecuentes</title>
+        <meta name="description" content="Preguntas Frecuentes: todas las respuestas a las dudas frecuentes." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <LayoutGeneral>
         <Box component={'section'} sx={{ display: 'flex', flexDirection: 'column', p:{ xs:'1rem', sm:'3rem 0'} }}>
-          <Typography variant='h4' component='h1' sx={{ textAlign: 'center' }}> Preguntas Frecuentes</Typography>
-          <Box sx={{ marginTop: '3rem' }}>
+          <Typography variant={"h2"} my={2} textAlign={'center'} fontSize={28} fontWeight={600}> Preguntas Frecuentes</Typography>
+          <Container sx={{ marginTop: '3rem', justifyContent:'center' }}>
             {faqs.map((faq) => (
-              <Accordion key={faq.id} sx={{ margin: '.5rem 0' }}>
+              <Accordion key={faq.id} sx={{ margin: '.5rem 0', width:{ sx:'100%'} }}>
                 <AccordionSummary id="panel-header" aria-controls="panel-content" sx={{ fontWeight: '600' }} expandIcon={<ArrowDropDownIcon />}>
                   {faq.question}
                 </AccordionSummary>
@@ -37,7 +37,7 @@ const Faqs: NextPage<FaqsPageProps> = ({ faqs }) => {
                 </AccordionDetails>
               </Accordion>
             ))}
-          </Box>
+          </Container>
         </Box>
       </LayoutGeneral>
     </>

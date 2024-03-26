@@ -16,6 +16,26 @@ import {
 } from "dh-marvel/services/checkout/checkout.errors";
 
 describe('Checkout', () => {
+    describe('when sending a valid card number', () => {
+        it('should return a 200 response with order data', async () => {
+            const order = {
+                customer: { address: {} }, 
+                card: { number: validCard }
+            } as CheckoutInput;
+    
+            const { req, res } = createMocks({
+                method: 'POST',
+                body: order
+            });
+    
+            await handleCheckout(req, res);
+    
+            expect(res._getStatusCode()).toBe(200);
+            expect(JSON.parse(res._getData())).toEqual(
+                expect.objectContaining({ data: order })
+            );
+        });
+    });
     describe('when sending a valid POST, customer and card data', () => {
         it('should return a 400 error', async () => {
             const order = {customer: {address: {}}, card: {number: validCard}} as CheckoutInput
@@ -104,6 +124,18 @@ describe('Checkout', () => {
             expect(res._getStatusCode()).toBe(400)
             expect(JSON.parse(res._getData())).toEqual(
                 expect.objectContaining(ERROR_CARD_DATA_INCORRECT),
+            );
+        })
+    })
+    describe('when sending a non POST request', () => {
+        it('should return a 405 error', async () => {
+            const {req, res} = createMocks({
+                method: 'GET',
+            });
+            await handleCheckout(req, res);
+            expect(res._getStatusCode()).toBe(405)
+            expect(JSON.parse(res._getData())).toEqual(
+                expect.objectContaining(ERROR_METHOD_NOT_ALLOWED),
             );
         })
     })

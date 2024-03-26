@@ -10,7 +10,7 @@ import {
 } from "dh-marvel/services/checkout/checkout.errors";
 
 const serverError = 'error'
-export const invalidAddress = 'invalid'
+export const invalidAddress = "invalid";
 export const validCard = '4242424242424242';
 export const withoutFundsCard = '4111411141114111';
 export const withoutAuthorizationCard = '4000400040004000';

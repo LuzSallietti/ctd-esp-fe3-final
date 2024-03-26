@@ -1,4 +1,5 @@
 import { NextPage } from 'next';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 import LayoutCheckout from 'dh-marvel/components/layouts/layout-checkout';
@@ -10,8 +11,8 @@ import CheckoutForm from 'dh-marvel/components/checkout/checkout-form.component'
 import { CheckoutInput } from 'dh-marvel/features/checkout/checkout.types';
 import * as yup from "yup";
 import { schema } from 'rules';
-import { apiCall } from 'functions/apiCall';
-import { translateError } from 'functions/translateError';
+import { apiCall } from '../../functions/apiCall';
+import { translateError } from '../../functions/translateError';
 import { useState } from 'react';
 
 
@@ -52,28 +53,35 @@ const Checkout: NextPage<CheckoutPageProps> = ({ comic }) => {
   }
 
   return (
-    <LayoutCheckout>
-      <Container sx={{ p:{ xs:'1rem', sm:'3rem 0'}, display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'center', flexWrap:'wrap', width: '100%' }}>
-      <Typography variant='h4' component='h1' sx={{width: '100%', textAlign:'center', mb:'2rem'}}>Checkout</Typography>
+    <>
+      <Head>
+        <title>Marvel Comics E-commerce - Checkout</title>
+        <meta name="description" content="Compra en Marvel E-commerce" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <LayoutCheckout>
+        <Container sx={{ p: { xs: '1rem', sm: '3rem 0' }, display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'center', flexWrap: 'wrap', width: '100%' }}>
+          <Typography variant={"h2"} my={2} textAlign={'center'} fontSize={28} fontWeight={600} sx={{ width: '100%', mb: '2rem' }}>Checkout</Typography>
 
-        {comic && <CharacterCard data={comic} />}
-        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: { xs: '100%', sm: '50%' } }}>
-          {comic.stock > 0 && <CheckoutForm onSubmit={handleFormSubmit}></CheckoutForm>}
-          {comic.stock < 1 && <>
-            <Alert variant="filled" sx={{ width: '66%' }} color='error' onClose={() => router.back()}>Producto sin stock</Alert>
-          </>}
-          {snackbarOpen && error &&
-            <>
-              <Snackbar
-                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                open={snackbarOpen}
-                autoHideDuration={6000}
-                onClose={() => setSnackbarOpen(false)}
-                message={translateError(error)} />
+          {comic && <CharacterCard data={comic} />}
+          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: { xs: '100%', sm: '50%' } }}>
+            {comic.stock > 0 && <CheckoutForm onSubmit={handleFormSubmit}></CheckoutForm>}
+            {comic.stock < 1 && <>
+              <Alert variant="filled" sx={{ width: '66%' }} color='error' onClose={() => router.back()}>Producto sin stock</Alert>
             </>}
-        </Box>
-      </Container>
-    </LayoutCheckout>
+            {snackbarOpen && error &&
+              <>
+                <Snackbar
+                  anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                  open={snackbarOpen}
+                  autoHideDuration={6000}
+                  onClose={() => setSnackbarOpen(false)}
+                  message={translateError(error)} />
+              </>}
+          </Box>
+        </Container>
+      </LayoutCheckout>
+    </>
   );
 };
 
