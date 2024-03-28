@@ -27,4 +27,47 @@ describe('CheckoutForm component tests', () => {
           expect(screen.getByText('Entrega')).toBeInTheDocument();
         });
     })
+
+    it('Renders step 1 (shipping) fields', async () => {
+      render(<CheckoutForm onSubmit={() => {customer}} />); 
+      
+      act(() => {
+          fireEvent.click(screen.getByRole('button', { name: 'Siguiente' }));
+        });
+      await waitFor(() => {
+        expect(screen.getByText('Entrega')).toBeInTheDocument();        
+        expect(screen.getByLabelText('Dirección')).toBeInTheDocument();
+        expect(screen.getByLabelText('Departamento, Piso, Barrio')).toBeInTheDocument();
+        expect(screen.getByLabelText('Ciudad')).toBeInTheDocument();
+        expect(screen.getByLabelText('Provincia')).toBeInTheDocument();
+        expect(screen.getByLabelText('Código Postal')).toBeInTheDocument();
+      });
+  })
+  it('Renders step 2 (payment) fields', async () => {
+    render(<CheckoutForm onSubmit={() => {customer}} />); 
+    
+    act(() => {
+        fireEvent.click(screen.getByRole('button', { name: 'Siguiente' }));
+        fireEvent.click(screen.getByRole('button', { name: 'Siguiente' }));
+      });
+    await waitFor(() => {  
+      expect(screen.getByText('Pago')).toBeInTheDocument();      
+      expect(screen.getByLabelText('Número de tarjeta')).toBeInTheDocument();
+      expect(screen.getByLabelText('Nombre en la tarjeta')).toBeInTheDocument();
+      expect(screen.getByLabelText('Fecha de expiracion (MMAA)')).toBeInTheDocument();
+      expect(screen.getByLabelText('Código de seguridad')).toBeInTheDocument();      
+    });
 })
+
+it('Handles setp changes', async () => {
+  render(<CheckoutForm onSubmit={() => {customer}} />); 
+  
+  act(() => {
+      fireEvent.click(screen.getByRole('button', { name: 'Siguiente' }));      
+    });
+  await waitFor(() => { 
+    fireEvent.click(screen.getByRole('button', { name: 'Anterior' })); 
+    expect(screen.getByLabelText('Nombre')).toBeInTheDocument();        
+  });
+})    
+});

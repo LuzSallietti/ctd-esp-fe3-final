@@ -10,7 +10,7 @@ import {
 } from "dh-marvel/services/checkout/checkout.errors";
 
 const serverError = 'error'
-export const invalidAddress = "invalid";
+export const invalidAddress = 'invalido';
 export const validCard = '4242424242424242';
 export const withoutFundsCard = '4111411141114111';
 export const withoutAuthorizationCard = '4000400040004000';
@@ -32,7 +32,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
     try {
         const body: CheckoutInput = req.body;
         console.log(body.card.number)
-        if (body.customer.address.address2 === invalidAddress) {
+        if (body.customer.address.address2 === 'invalid') {
             res.status(400).json(ERROR_INCORRECT_ADDRESS);
             return
         }

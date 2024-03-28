@@ -66,12 +66,12 @@ describe('Checkout', () => {
         it('should return a 400 error', async () => {
             const {req, res} = createMocks({
                 method: 'POST',
-                body: {customer: {address: {address2: invalidAddress}}} as CheckoutInput
+                body: {customer: {address:{address2:'invalid'}}} as CheckoutInput
             });
             await handleCheckout(req, res);
             expect(res._getStatusCode()).toBe(400)
             expect(JSON.parse(res._getData())).toEqual(
-                expect.objectContaining(ERROR_INCORRECT_ADDRESS),
+                expect.objectContaining( ERROR_INCORRECT_ADDRESS ),
             );
         })
     })
